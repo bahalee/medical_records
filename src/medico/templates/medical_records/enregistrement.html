@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enregistrement</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4; /* Light background for better readability */
+      }
+      h1 {
+        color: #35424a;
+      }
+      p {
+        font-size: 1.1rem;
+      }
+      img {
+        max-width: 200px; /* Adjust as needed */
+        height: auto;
+        margin: 10px 0; /* Add some margin for spacing */
+      }
+      .image-container {
+        display: flex;
+        flex-wrap: wrap; /* Allow images to wrap to the next line */
+      }
+      .image-container img {
+        margin-right: 10px; /* Space between images */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Enregistrement de {{ enregistrement.nomComplet }}</h1>
+    <p><strong>Naissance:</strong> {{ enregistrement.naissance }}</p>
+    <p><strong>Admission:</strong> {{ enregistrement.admission }}</p>
+    <p><strong>Médication:</strong> {{ enregistrement.medication }}</p>
+    <p><strong>Notes:</strong> {{ enregistrement.notes }}</p>
+
+    <h3>Images:</h3>
+    <div class="image-container">
+      {% if enregistrement.img1 %}
+      <img src="{{ enregistrement.img1.url }}" alt="Image 1" />
+      {% else %}
+      <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Image" />
+      {% endif %} {% if enregistrement.img2 %}
+      <img src="{{ enregistrement.img2.url }}" alt="Image 2" />
+      {% else %}
+      <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Image" />
+      {% endif %} {% if enregistrement.img3 %}
+      <img src="{{ enregistrement.img3.url }}" alt="Image 3" />
+      {% else %}
+      <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Image" />
+      {% endif %} {% if enregistrement.img4 %}
+      <img src="{{ enregistrement.img4.url }}" alt="Image 4" />
+      {% else %}
+      <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Image" />
+      {% endif %} {% if enregistrement.img5 %}
+      <img src="{{ enregistrement.img5.url }}" alt="Image 5" />
+      {% else %}
+      <img src="{{ MEDIA_URL }}default_image.jpg" alt="Default Image" />
+      {% endif %}
+    </div>
+  </body>
+</html>

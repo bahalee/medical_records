@@ -1,0 +1,13 @@
+{% extends 'medical_records/base.html' %} {% block title %}Modifier un
+Enregistrement{% endblock %} {% block content %}
+<h2>Modifier un Enregistrement</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Enregistrer les modifications</button>
+</form>
+
+<a href="{% url 'lister_enregistrements' %}"
+  >Retour à la liste des enregistrements</a
+>
+{% endblock %}

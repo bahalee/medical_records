@@ -1,0 +1,19 @@
+{% extends 'medical_records/base.html' %} {% block content %}
+<h2>Appliquer des Filtres</h2>
+<form method="get">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Appliquer les Filtres</button>
+</form>
+
+{% if filtered_results %}
+<h3>Résultats Filtrés:</h3>
+<ul>
+  {% for enregistrement in filtered_results %}
+  <li>{{ enregistrement.nomComplet }} - {{ enregistrement.medication }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+<a href="{% url 'lister_enregistrements' %}"
+  >Retour à la liste des enregistrements</a
+>
+{% endblock %}

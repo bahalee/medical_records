@@ -1,0 +1,215 @@
+:root {
+    --primary-color: #8e44ad;  /* Violet accentué */
+    --secondary-color: #9b59b6; /* Violet clair */
+    --hover-color: #d1a6ff; /* Hover violet */
+    --light-bg: #f4f8ff;
+    --text-color: #2c3e50;
+    --white: #ffffff;
+    --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  /* Général */
+  body {
+    background: url("../img/decoration.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  header {
+    background: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: var(--shadow-light);
+  }
+  
+  /* Navigation */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--secondary-color);
+    padding: 15px 30px;
+    box-shadow: var(--shadow-light);
+  }
+  
+  nav .logo a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: var(--transition);
+  }
+  
+  nav ul li a:hover {
+    color: var(--primary-color);
+    background-color: var(--hover-color);
+  }
+  
+  /* Menu Toggle (Mobile) */
+  .menu-toggle {
+    display: none;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .menu-toggle.active + ul {
+    display: flex;
+  }
+  
+  @media (max-width: 768px) {
+    nav ul {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    nav ul.active {
+      display: flex;
+    }
+    .menu-toggle {
+      display: block;
+    }
+  }
+  
+  /* Contenu principal */
+  main {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    max-width: 1000px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+  }
+  
+  /* Tableau */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: var(--white);
+    box-shadow: var(--shadow-light);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  table th {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table tr:nth-child(even) {
+    background: var(--light-bg);
+  }
+  
+  table tr:hover {
+    background-color: #eaf3ff;
+    box-shadow: var(--shadow-light);
+  }
+  
+  /* Formulaire */
+  form {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  form label {
+    display: block;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"],
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #b3d1ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--light-bg);
+    transition: border-color 0.3s ease;
+  }
+  
+  form input:focus,
+  form textarea:focus,
+  form select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    background-color: #e6f2ff;
+  }
+  
+  form button {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition);
+  }
+  
+  form button:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+  }
+  
+  /* Pied de page */
+  footer {
+    background: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: var(--shadow-light);
+    margin-top: auto;
+    font-size: 0.9rem;
+  }  

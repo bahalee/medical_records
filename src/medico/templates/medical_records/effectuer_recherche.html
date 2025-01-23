@@ -1,0 +1,19 @@
+{% extends 'medical_records/base.html' %} {% block content %}
+<h2>Effectuer une Recherche</h2>
+<form method="get">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Rechercher</button>
+</form>
+
+{% if results %}
+<h3>Résultats de la Recherche:</h3>
+<ul>
+  {% for enregistrement in results %}
+  <li>{{ enregistrement.nomComplet }} - {{ enregistrement.medication }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+<a href="{% url 'lister_enregistrements' %}"
+  >Retour à la liste des enregistrements</a
+>
+{% endblock %}

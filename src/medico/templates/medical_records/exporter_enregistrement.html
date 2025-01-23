@@ -1,0 +1,19 @@
+{% extends 'medical_records/base.html' %}
+
+{% block content %}
+<div class="form-container">
+  <h2>Exporter un Enregistrement</h2>
+  <form method="post" action="{% url 'exporter_enregistrement' enregistrement.idenreg 'FORMAT_PLACEHOLDER' %}">
+    {% csrf_token %}
+    <label for="format">Choisissez le format d'exportation:</label>
+    <select name="format" id="format" onchange="this.form.action='{% url 'exporter_enregistrement'
+     enregistrement.idenreg '' %}' + this.value;">
+      <option value="XLS">Exporter en Excel</option>
+      <option value="PDF">Exporter en PDF</option>
+      <option value="DOCX">Exporter en Word</option>
+      <option value="HTML">Exporter en HTML</option>
+    </select>
+    <button type="submit" class="submit-btn">Exporter</button>
+  </form>
+</div>
+{% endblock %}

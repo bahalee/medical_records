@@ -1,0 +1,11 @@
+{% extends 'medical_records/base.html' %} {% block title %}Créer un
+Enregistrement{% endblock %} {% block content %}
+<h2>Créer un Enregistrement</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" >Créer</button>
+</form>
+<a href="{% url 'lister_enregistrements' %}"
+  >Retour à la liste des enregistrements</a
+>
+{% endblock %}

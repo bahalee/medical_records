@@ -1,0 +1,22 @@
+{% extends 'medical_records/base.html' %}
+
+{% block title %}Créer Médecin{% endblock %}
+
+{% block content %}
+<div>
+    <h2 style="text-align: center; color: var(--primary-color);">Créer Médecin</h2>
+    <form method="post" enctype="multipart/form-data" style="text-align: left;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="width: 100%; padding: 12px; background-color: var(--primary-color); 
+        color: white; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease;">
+            Créer
+        </button>
+    </form>
+    <a href="{% url 'login' %}" style="display: block; margin-top: 15px; color: var(--secondary-color);
+     text-align: center; text-decoration: none; font-weight: bold; transition: color 0.3s ease;">
+        Vous avez un compte ?
+    </a>
+</div>
+{% endblock %}
+
