@@ -1,7 +1,6 @@
 from django.urls import path
 from django.views.generic import RedirectView
 from .views import (
-    login_medecin,
     home,
     create_medecin,
     create_enregistrement,
@@ -13,6 +12,7 @@ from .views import (
     supprimer_enregistrement,
     success
 )
+from .auth_views import(login_medecin)
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/login/', permanent=False), name='redirect_to_login'), 
