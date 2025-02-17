@@ -13,10 +13,11 @@ from .views import (
     success
 )
 from .auth_views import(login_medecin)
-
+from.auth_views import (logout_medecin)
 urlpatterns = [
     path('', RedirectView.as_view(url='/login/', permanent=False), name='redirect_to_login'), 
     path('login/', login_medecin, name='login'), 
+    path('logout/', logout_medecin, name='logout'), 
     path('home/', home, name='home'),  
     path('create_medecin/', create_medecin, name='create_medecin'), 
     path('create_enregistrement/', create_enregistrement, name='create_enregistrement'), 

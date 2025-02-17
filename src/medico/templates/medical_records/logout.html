@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Déconnexion</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("{% static 'img/logout_background.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        color: #ffffff;
+      }
+
+      .logout-container {
+        background: rgba(103, 58, 183, 0.85);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        width: 360px;
+        text-align: center;
+        border: 2px solid #4a148c;
+      }
+
+      h1 {
+        color: #6a1b9a;
+        margin-bottom: 20px;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .logout-button {
+        background-color: #8e24aa;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .logout-button:hover {
+        background-color: #6a1b9a;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .logout-container {
+          width: 90%;
+          padding: 20px;
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logout-container">
+      <h1>Déconnexion</h1>
+      <p>Vous êtes sur le point de vous déconnecter. Voulez-vous continuer ?</p>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">Se Déconnecter</button>
+      </form>
+      <a href="{% url 'home' %}" class="logout-button" style="margin-top: 10px; background-color: #4a148c;">Annuler</a>
+      <script>
+        document.getElementById("logout-btn").addEventListener("click", function () {
+          localStorage.setItem("isLoggedOut", "true"); 
+        });
+      </script>
+    </div>
+  </body>
+</html>

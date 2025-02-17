@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Médecin</title>
     <style>
+      :root {
+        --primary-color: #8e24aa; /* Deep purple */
+        --secondary-color: #6a1b9a; /* Darker purple */
+        --background-color: rgba(103, 58, 183, 0.85); /* Semi-transparent purple */
+        --input-background: #f3e5f5; /* Light purple */
+        --text-color: #4a148c; /* Dark purple */
+        --error-color: #f44336; /* Red */
+      }
+
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-image: url("{% static 'img/medecin.jpg' %}"); /* Correct path for Django static files */
+        background-image: url("{% static 'img/medecin.jpg' %}");
         background-size: cover;
         background-position: center;
         display: flex;
@@ -20,23 +29,34 @@
       }
 
       h1 {
-        color: #6a1b9a; /* Violet color for headings */
+        color: var(--primary-color);
         margin-bottom: 20px;
         text-align: center;
         font-size: 2rem;
-        text-transform: uppercase; /* Adds a modern touch */
+        text-transform: uppercase;
         letter-spacing: 1px;
-        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Soft shadow for better readability */
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
       }
 
       form {
-        background: rgba(103, 58, 183, 0.85); /* Semi-transparent purple background */
+        background: var(--background-color);
         padding: 30px;
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         width: 360px;
-        text-align: center;
-        border: 2px solid #4a148c; /* Darker purple border */
+        text-align: left; /* Align form content to the left */
+        border: 2px solid var(--secondary-color);
+      }
+
+      .form-group {
+        margin-bottom: 15px; /* Space between form fields */
+      }
+
+      .form-group label {
+        display: block; /* Ensure labels are on their own line */
+        margin-bottom: 5px; /* Space between label and input */
+        font-weight: bold;
+        color: var(--text-color);
       }
 
       input[type="text"],
@@ -50,20 +70,20 @@
         border-radius: 6px;
         box-sizing: border-box;
         font-size: 1rem;
-        background-color: #f3e5f5; /* Light purple for input fields */
-        color: #4a148c; /* Darker purple text color */
+        background-color: var(--input-background);
+        color: var(--text-color);
       }
 
       input[type="text"]:focus,
       input[type="email"]:focus,
       input[type="password"]:focus {
-        border: 1px solid #8e24aa; /* Slightly darker purple on focus */
+        border: 1px solid var(--primary-color);
         outline: none;
-        box-shadow: 0 0 8px rgba(138, 39, 158, 0.5); /* Soft purple glow */
+        box-shadow: 0 0 8px rgba(138, 39, 158, 0.5);
       }
 
       button {
-        background-color: #8e24aa; /* Deep purple for the button */
+        background-color: var(--primary-color);
         color: white;
         border: none;
         cursor: pointer;
@@ -75,35 +95,49 @@
       }
 
       button:hover {
-        background-color: #6a1b9a; /* Darker purple on hover */
-        transform: scale(1.05); /* Slight zoom effect */
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
       }
 
       .error {
-        color: #f44336; /* Red color for error messages */
+        color: var(--error-color);
         margin-top: 10px;
         text-align: center;
         font-size: 0.95rem;
       }
 
       .field-error {
-        color: #f44336;
+        color: var(--error-color);
         font-size: 0.9em;
       }
 
       .non-field-error {
-        color: #f44336;
+        color: var(--error-color);
         font-size: 1em;
+      }
+
+      .create-account-link {
+        display: block;
+        margin-top: 15px;
+        color: var(--secondary-color);
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      .create-account-link:hover {
+        color: var(--primary-color);
       }
 
       @media (max-width: 768px) {
         form {
-          width: 90%; /* Full width on smaller screens */
+          width: 90%;
           padding: 20px;
         }
 
         h1 {
-          font-size: 1.6rem; /* Smaller heading on small screens */
+          font-size: 1.6rem;
         }
       }
     </style>
@@ -112,18 +146,40 @@
     <div>
       <h1>Login Médecin</h1>
       <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        {% for field in form %}
-          {% if field.errors %}
+        {% csrf_token %}
+        
+        <!-- Manually render form fields with labels on the left -->
+        <div class="form-group">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {% if form.email.errors %}
             <div class="field-error">
-              {% for error in field.errors %}
+              {% for error in form.email.errors %}
                 <p>{{ error }}</p>
               {% endfor %}
             </div>
           {% endif %}
-        {% endfor %}
+        </div>
+
+        <div class="form-group">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+          {% if form.password.errors %}
+            <div class="field-error">
+              {% for error in form.password.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
 
         <button type="submit">Login</button>
+
+        {% if request.resolver_match.url_name == 'login' %}
+          <a href="{% url 'create_medecin' %}" class="create-account-link">
+            Vous n'avez pas de compte ? Créez-en un.
+          </a>
+        {% endif %}
       </form>
     </div>
   </body>

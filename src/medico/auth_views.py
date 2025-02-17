@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from .forms import MedecinLoginForm 
 from django.shortcuts import render, redirect
 def login_medecin(request):
@@ -16,3 +16,8 @@ def login_medecin(request):
     else:
         form = MedecinLoginForm() 
     return render(request, 'medical_records/login.html', {'form': form}) 
+def logout_medecin(request):
+    logout(request)
+    response = redirect('login') 
+    response.delete_cookie('sessionid')  
+    return response

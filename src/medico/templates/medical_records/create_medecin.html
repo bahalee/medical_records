@@ -1,22 +1,233 @@
-{% extends 'medical_records/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Créer Médecin</title>
+    <style>
+      :root {
+        --primary-color: #8e24aa; /* Deep purple */
+        --secondary-color: #6a1b9a; /* Darker purple */
+        --background-color: rgba(103, 58, 183, 0.85); /* Semi-transparent purple */
+        --input-background: #f3e5f5; /* Light purple */
+        --text-color: #4a148c; /* Dark purple */
+        --error-color: #f44336; /* Red */
+      }
 
-{% block title %}Créer Médecin{% endblock %}
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("{% static 'img/medecin.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column; /* Ensures h1 is above the form */
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Ensures the body takes at least the full viewport height */
+        margin: 0;
+        color: white;
+      }
 
-{% block content %}
-<div>
-    <h2 style="text-align: center; color: var(--primary-color);">Créer Médecin</h2>
-    <form method="post" enctype="multipart/form-data" style="text-align: left;">
+      .container {
+        text-align: center;
+        width: 90%; /* Responsive width */
+        max-width: 420px; /* Maximum width for larger screens */
+        padding: 20px;
+      }
+
+      h1 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: fadeIn 0.6s ease-in-out forwards;
+      }
+
+      form {
+        background: var(--background-color);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        width: 100%; /* Full width of the container */
+        max-width: 380px; /* Maximum width for the form */
+        text-align: left;
+        border: 2px solid var(--secondary-color);
+        margin-top: 10px; /* Small space between h1 and form */
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: fadeIn 0.8s ease-in-out forwards 0.2s;
+      }
+
+      /* Smooth fade-in animation */
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .form-group {
+        margin-bottom: 15px; /* Space between form fields */
+      }
+
+      .form-group label {
+        display: block; /* Ensure labels are on their own line */
+        margin-bottom: 5px; /* Space between label and input */
+        font-weight: bold;
+        color: #6a1b9a; /* Set label color to #6a1b9a */
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="file"],
+      button {
+        width: 100%;
+        padding: 14px;
+        margin: 12px 0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1rem;
+        background-color: var(--input-background);
+        color: var(--text-color);
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus,
+      input[type="file"]:focus {
+        border: 1px solid var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 8px rgba(138, 39, 158, 0.5);
+      }
+
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 16px;
+        border-radius: 8px;
+      }
+
+      button:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.05);
+      }
+
+      .error {
+        color: var(--error-color);
+        margin-top: 10px;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      .field-error {
+        color: var(--error-color);
+        font-size: 0.9em;
+      }
+
+      .non-field-error {
+        color: var(--error-color);
+        font-size: 1em;
+      }
+
+      .login-link {
+        display: block;
+        margin-top: 15px;
+        color: var(--secondary-color);
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      .login-link:hover {
+        color: var(--primary-color);
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 1.6rem; /* Smaller heading on small screens */
+        }
+
+        form {
+          padding: 20px; /* Slightly reduce padding on smaller screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Créer Médecin</h1>
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" style="width: 100%; padding: 12px; background-color: var(--primary-color); 
-        color: white; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease;">
-            Créer
-        </button>
-    </form>
-    <a href="{% url 'login' %}" style="display: block; margin-top: 15px; color: var(--secondary-color);
-     text-align: center; text-decoration: none; font-weight: bold; transition: color 0.3s ease;">
-        Vous avez un compte ?
-    </a>
-</div>
-{% endblock %}
+        
+        <!-- Manually render form fields with labels on the left -->
+        <div class="form-group">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {% if form.email.errors %}
+            <div class="field-error">
+              {% for error in form.email.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
 
+        <div class="form-group">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+          {% if form.password.errors %}
+            <div class="field-error">
+              {% for error in form.password.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.specialite.label_tag }}
+          {{ form.specialite }}
+          {% if form.specialite.errors %}
+            <div class="field-error">
+              {% for error in form.specialite.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.nom_complet.label_tag }}
+          {{ form.nom_complet }}
+          {% if form.nom_complet.errors %}
+            <div class="field-error">
+              {% for error in form.nom_complet.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <button type="submit">Créer</button>
+
+        <a href="{% url 'login' %}" class="login-link">
+          Vous avez déjà un compte ? Connectez-vous.
+        </a>
+      </form>
+    </div>
+  </body>
+</html>
