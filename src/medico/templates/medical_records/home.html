@@ -1,4 +1,17 @@
-{% extends 'medical_records/base.html' %} {% block content %}
+{% extends 'medical_records/base.html' %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn !== "true") {
+      window.location.href = "{% url 'login' %}"; 
+    }
+  });
+</script>
+{% endblock %}
+
+{% block content %}
 <h2>Bienvenue dans le Système de Gestion des Dossiers Médicaux</h2>
 <p>Utilisez le menu pour naviguer dans l'application.</p>
 {% endblock %}

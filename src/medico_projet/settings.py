@@ -7,8 +7,7 @@ SECRET_KEY = 'django-insecure-fp=iahx%t1s@76%-jfobqzbq6x_lbdsdr0=xqx%8tb!5jbn*f&
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127..0.0.1', 'localhost']
-# middleware.py (custom middleware)
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 class RestrictAdminMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response

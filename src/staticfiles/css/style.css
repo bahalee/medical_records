@@ -1,64 +1,62 @@
 :root {
-    --primary-color: #8e44ad;  /* Violet accentué */
-    --secondary-color: #9b59b6; /* Violet clair */
-    --hover-color: #d1a6ff; /* Hover violet */
+    --primary-color: #6a1b9a;  /* Purple */
+    --secondary-color: #8e24aa; /* Lighter Purple */
+    --hover-color: #ba68c8;  /* Lighter Hover Color */
     --light-bg: #f4f8ff;
     --text-color: #2c3e50;
     --white: #ffffff;
     --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
-  }
-  
-  /* Général */
-  body {
-    background: url("../img/decoration.jpg") no-repeat center center fixed;
+    --border-radius: 8px;
+}
+
+body {
+    background: url('../img/medecin.jpg') no-repeat center center fixed;
     background-size: cover;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-color);
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     line-height: 1.6;
-  }
-  
-  /* Header */
-  header {
+}
+
+header {
     background: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 20px;
-    font-size: 2rem;
+    padding: 10px 20px;
+    font-size: 1.6rem;
     font-weight: bold;
     box-shadow: var(--shadow-light);
-  }
-  
-  /* Navigation */
-  nav {
+}
+
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--secondary-color);
-    padding: 15px 30px;
+    padding: 10px 30px;
     box-shadow: var(--shadow-light);
-  }
-  
-  nav .logo a {
+}
+
+nav .logo a {
     color: var(--white);
     text-decoration: none;
     font-size: 1.8rem;
     font-weight: bold;
     letter-spacing: 1.5px;
-  }
-  
-  nav ul {
+}
+
+nav ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  nav ul li a {
+}
+
+nav ul li a {
     color: var(--white);
     text-decoration: none;
     font-weight: 500;
@@ -66,15 +64,14 @@
     padding: 10px 15px;
     border-radius: 4px;
     transition: var(--transition);
-  }
-  
-  nav ul li a:hover {
+}
+
+nav ul li a:hover {
     color: var(--primary-color);
     background-color: var(--hover-color);
-  }
-  
-  /* Menu Toggle (Mobile) */
-  .menu-toggle {
+}
+
+.menu-toggle {
     display: none;
     background: var(--primary-color);
     color: var(--white);
@@ -82,93 +79,148 @@
     font-size: 1.5rem;
     cursor: pointer;
     padding: 10px;
-  }
-  
-  .menu-toggle.active + ul {
+}
+
+.menu-toggle.active + ul {
     display: flex;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     nav ul {
-      display: none;
-      flex-direction: column;
-      gap: 10px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
     }
     nav ul.active {
-      display: flex;
+        display: flex;
     }
     .menu-toggle {
-      display: block;
+        display: block;
     }
-  }
-  
-  /* Contenu principal */
-  main {
+}
+
+main {
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 40px;
-    max-width: 1000px;
-    margin: 40px auto;
-    border-radius: 12px;
+    margin: 20px auto;
+    padding: 20px;
+    width: 95%;
+    background-color: rgba(255, 255, 255, 0.521);
     box-shadow: var(--shadow-light);
-  }
-  
-  /* Tableau */
-  table {
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    max-width: 1200px;
+}
+/* Improve table structure */
+table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     background: var(--white);
     box-shadow: var(--shadow-light);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     overflow: hidden;
-  }
-  
-  table th {
-    background: var(--primary-color);
-    color: var(--white);
+}
+.table-container {
+    overflow-x: auto;
+}
+
+
+table th, table td {
     padding: 15px;
     text-align: left;
-    font-weight: bold;
-  }
-  
-  table td {
-    padding: 15px;
+    vertical-align: middle;
     border-bottom: 1px solid #ddd;
-  }
-  
-  table tr:nth-child(even) {
-    background: var(--light-bg);
-  }
-  
-  table tr:hover {
-    background-color: #eaf3ff;
+}
+
+table th {
+    background: var(--primary-color);
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+table td {
+    font-size: 0.95rem;
+}
+
+table tr:hover {
+    background-color: #f0f5ff;
     box-shadow: var(--shadow-light);
-  }
-  
-  /* Formulaire */
-  form {
+}
+
+/* Center actions in the last column */
+table td:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+/* General styles for all action links */
+.action-link {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: var(--transition);
+    text-align: center;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modifier - Blue */
+.action-link.modifier {
+    background-color: #3498db;
+    color: var(--white);
+}
+.action-link.modifier:hover {
+    background-color: #2980b9;
+}
+
+/* Supprimer - Red */
+.action-link.supprimer {
+    background-color: #e74c3c;
+    color: var(--white);
+}
+.action-link.supprimer:hover {
+    background-color: #c0392b;
+}
+
+/* Exporter - Green */
+.action-link.exporter {
+    background-color: #2ecc71;
+    color: var(--white);
+}
+.action-link.exporter:hover {
+    background-color: #27ae60;
+}
+
+
+form {
     background: var(--white);
     padding: 30px;
     border-radius: 12px;
     box-shadow: var(--shadow-light);
-    max-width: 600px;
-    margin: 20px auto;
-  }
-  
-  form label {
+    width: 95%;
+    max-width: 100%;
+    margin: 20px 0;
+}
+
+form label {
     display: block;
     font-weight: bold;
     color: var(--text-color);
     margin-bottom: 10px;
     font-size: 1.1rem;
-  }
-  
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"],
-  form select,
-  form textarea {
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -177,17 +229,17 @@
     font-size: 1rem;
     background: var(--light-bg);
     transition: border-color 0.3s ease;
-  }
-  
-  form input:focus,
-  form textarea:focus,
-  form select:focus {
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
     border-color: var(--primary-color);
     outline: none;
     background-color: #e6f2ff;
-  }
-  
-  form button {
+}
+
+form button {
     background: var(--primary-color);
     color: var(--white);
     padding: 15px;
@@ -196,20 +248,46 @@
     cursor: pointer;
     font-size: 1.2rem;
     transition: var(--transition);
-  }
-  
-  form button:hover {
+}
+
+form button:hover {
     background: var(--secondary-color);
     transform: scale(1.05);
-  }
-  
-  /* Pied de page */
-  footer {
+}
+
+footer {
     background: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
     box-shadow: var(--shadow-light);
     margin-top: auto;
     font-size: 0.9rem;
-  }  
+}
+form input, form textarea, form select {
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    nav ul li {
+        margin-left: 0;
+        width: 100%;
+    }
+    nav ul li a {
+        padding: 15px;
+        text-align: center;
+    }
+    table td:last-child {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .action-link {
+        width: 100%;
+    }
+}

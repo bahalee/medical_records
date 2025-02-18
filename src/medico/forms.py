@@ -4,7 +4,20 @@ from .models import Medecin, Enregistrement
 class MedecinLoginForm(forms.Form):
     email = forms.EmailField(label='Email', required=True)
     password = forms.CharField(label='Password', widget=forms.PasswordInput, required=True)
+class MedecinLogoutForm(forms.Form):
+    confirm_logout = forms.BooleanField(
+        label="Confirmer la déconnexion",
+        required=True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        help_text="Cochez cette case pour confirmer que vous souhaitez vous déconnecter."
+    )
 
+    feedback = forms.CharField(
+        label="Feedback (optionnel)",
+        required=False,
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        help_text="Laissez un commentaire avant de vous déconnecter."
+    )
 class MedecinForm(forms.ModelForm):
     password = forms.CharField(
         label='Password',

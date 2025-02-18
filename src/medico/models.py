@@ -17,17 +17,32 @@ class MedecinManager(BaseUserManager):
         if not email:
             raise ValueError(_('The Email field must be set'))
         email = self.normalize_email(email)
+        if 'medico' not in extra_fields:
+            from medico.models import Medico
+            extra_fields['medico'] = Medico.objects.get(id=1)  
+    
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)  
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+    
+        if 'medico' not in extra_fields:
+            from medico.models import Medico
+            extra_fields['medico'] = Medico.objects.get(id=1)  
+    
         return self.create_user(email, password, **extra_fields)
+class Medico(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    specialty = models.CharField(max_length=100)
 
-class Medecin(AbstractBaseUser , PermissionsMixin):
+    def __str__(self):
+        return self.name
+class Medecin(AbstractBaseUser, PermissionsMixin):
     id = models.BigAutoField(primary_key=True)
     nom_complet = models.CharField(max_length=255)
     email = models.EmailField(_('email address'), unique=True)
@@ -35,12 +50,12 @@ class Medecin(AbstractBaseUser , PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
+    
+    medico = models.ForeignKey(Medico, on_delete=models.CASCADE, null=True, blank=True)
 
     objects = MedecinManager()
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nom_complet', 'specialite']
-
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='medecin_set',
@@ -63,7 +78,6 @@ class Medecin(AbstractBaseUser , PermissionsMixin):
     def gererEnregistrements(self) -> List:
         """Returns the list of enregistrements for the Medecin."""
         return Enregistrement.objects.filter(medecin=self)
-
 class Enregistrement(models.Model):
     idenreg = models.AutoField(primary_key=True)
     nomComplet = models.CharField(max_length=200)
@@ -202,3 +216,15 @@ class Exporter(models.Model):
         response = HttpResponse(html_content, content_type='text/html')
         response['Content-Disposition'] = 'attachment; filename="enregistrement.html"'
         return response
+from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class Feedback(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Feedback from {self.user.email}"

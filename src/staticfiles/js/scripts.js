@@ -13,23 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const formCreateMedecin = document.querySelector("#form-create-medecin");
   if (formCreateMedecin) {
     formCreateMedecin.addEventListener("submit", function (e) {
-      e.preventDefault(); // Empêche le formulaire de se soumettre avant validation
-
+      e.preventDefault();
       const username = document.querySelector("#username").value;
       const email = document.querySelector("#email").value;
       const password = document.querySelector("#password").value;
-
       if (username === "" || email === "" || password === "") {
         alert("Tous les champs doivent être remplis");
         return;
       }
-
-      // Si la validation est réussie, vous pouvez envoyer le formulaire ici
       this.submit();
     });
   }
-
-  // Recherche en temps réel pour la page des enregistrements
   const searchInput = document.querySelector("#search-input");
   if (searchInput) {
     searchInput.addEventListener("input", function () {
@@ -53,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   deleteButtons.forEach((button) => {
     button.addEventListener("click", function (e) {
       if (!confirm("Êtes-vous sûr de vouloir supprimer cet enregistrement ?")) {
-        e.preventDefault(); // Annule l'action si l'utilisateur refuse
+        e.preventDefault();
       }
     });
   });

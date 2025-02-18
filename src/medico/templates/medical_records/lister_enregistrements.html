@@ -1,57 +1,53 @@
-{% extends 'medical_records/base.html' %} {% block content %}
+{% extends 'medical_records/base.html' %}
+
+{% block content %}
 <h2>Gérer les Enregistrements</h2>
 <table>
-  <thead>
-    <tr>
-      <th>Nom Complet</th>
-      <th>Naissance</th>
-      <th>Admission</th>
-      <th>Médication</th>
-      <th>Notes</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for enregistrement in enregistrements %}
-    <tr>
-      <td>{{ enregistrement.nomComplet }}</td>
-      <td>{{ enregistrement.naissance }}</td>
-      <td>{{ enregistrement.admission }}</td>
-      <td>{{ enregistrement.medication }}</td>
-      <td>{{ enregistrement.notes }}</td>
-      <td>
-        <a href="{% url 'modifier_enregistrement' enregistrement.idenreg %}"
-          >Modifier</a
-        >
-        <a
-          href="{% url 'supprimer_enregistrement' enregistrement.pk %}"
-          onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?');"
-          >Supprimer</a
-        >
-        <a
-          href="{% url 'exporter_enregistrement' enregistrement.idenreg 'PDF' %}"
-          >Exporter en PDF</a
-        >
-        <a
-          href="{% url 'exporter_enregistrement' enregistrement.idenreg 'XLS' %}"
-          >Exporter en Excel</a
-        >
-        <a
-          href="{% url 'exporter_enregistrement' enregistrement.idenreg 'DOCX' %}"
-          >Exporter en Word</a
-        >
-        <a
-          href="{% url 'exporter_enregistrement' enregistrement.idenreg 'HTML' %}"
-          >Exporter en HTML</a
-        >
-      </td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="6">Aucun enregistrement trouvé.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
+    <thead>
+        <tr>
+            <th>Nom Complet</th>
+            <th>Naissance</th>
+            <th>Admission</th>
+            <th>Médication</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enregistrement in enregistrements %}
+        <tr>
+            <td>{{ enregistrement.nomComplet }}</td>
+            <td>{{ enregistrement.naissance }}</td>
+            <td>{{ enregistrement.admission }}</td>
+            <td>{{ enregistrement.medication }}</td>
+            <td>{{ enregistrement.notes }}</td>
+            <td>
+                <a href="{% url 'modifier_enregistrement' enregistrement.idenreg %}" class="action-link modifier">
+                    <i class="fas fa-edit"></i> Modifier
+                </a>
+                <a href="{% url 'supprimer_enregistrement' enregistrement.pk %}" class="action-link supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet enregistrement ?');">
+                    <i class="fas fa-trash"></i> Supprimer
+                </a>
+                <a href="{% url 'exporter_enregistrement' enregistrement.idenreg 'PDF' %}" class="action-link exporter">
+                    <i class="fas fa-file-pdf"></i> Exporter en PDF
+                </a>
+                <a href="{% url 'exporter_enregistrement' enregistrement.idenreg 'XLS' %}" class="action-link exporter">
+                    <i class="fas fa-file-excel"></i> Exporter en Excel
+                </a>
+                <a href="{% url 'exporter_enregistrement' enregistrement.idenreg 'DOCX' %}" class="action-link exporter">
+                    <i class="fas fa-file-word"></i> Exporter en Word
+                </a>
+                <a href="{% url 'exporter_enregistrement' enregistrement.idenreg 'HTML' %}" class="action-link exporter">
+                    <i class="fas fa-file-code"></i> Exporter en HTML
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Aucun enregistrement trouvé.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
-<a href="{% url 'create_enregistrement' %}">Créer un nouvel enregistrement</a>
+<a href="{% url 'create_enregistrement' %}" class="create-link">Créer un nouvel enregistrement</a>
 {% endblock %}

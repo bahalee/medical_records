@@ -144,11 +144,9 @@
   </head>
   <body>
     <div>
-      <h1>Login Médecin</h1>
-      <form method="post">
+      <h1>Connexion Médecin</h1>
+      <form method="post" id="login-form">
         {% csrf_token %}
-        
-        <!-- Manually render form fields with labels on the left -->
         <div class="form-group">
           {{ form.email.label_tag }}
           {{ form.email }}
@@ -182,5 +180,18 @@
         {% endif %}
       </form>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loginForm = document.getElementById("login-form");
+        loginForm.addEventListener("submit", function () {
+          localStorage.setItem("isLoggedIn", "true");
+        });
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === "true") {
+          window.location.href = "{% url 'home' %}";
+        }
+      });
+    </script>
   </body>
 </html>

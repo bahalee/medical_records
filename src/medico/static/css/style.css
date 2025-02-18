@@ -7,7 +7,9 @@
     --white: #ffffff;
     --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --border-radius: 8px;
 }
+
 body {
     background: url('../img/medecin.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -19,23 +21,26 @@ body {
     min-height: 100vh;
     line-height: 1.6;
 }
+
 header {
     background: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 10px 20px;  /* Reduced padding for minimized height */
+    padding: 10px 20px;
     font-size: 1.6rem;
     font-weight: bold;
     box-shadow: var(--shadow-light);
 }
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: var(--secondary-color);
-    padding: 10px 30px;  /* Reduced padding for minimized height */
+    padding: 10px 30px;
     box-shadow: var(--shadow-light);
 }
+
 nav .logo a {
     color: var(--white);
     text-decoration: none;
@@ -43,12 +48,14 @@ nav .logo a {
     font-weight: bold;
     letter-spacing: 1.5px;
 }
+
 nav ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 nav ul li a {
     color: var(--white);
     text-decoration: none;
@@ -58,10 +65,12 @@ nav ul li a {
     border-radius: 4px;
     transition: var(--transition);
 }
+
 nav ul li a:hover {
     color: var(--primary-color);
     background-color: var(--hover-color);
 }
+
 .menu-toggle {
     display: none;
     background: var(--primary-color);
@@ -71,9 +80,11 @@ nav ul li a:hover {
     cursor: pointer;
     padding: 10px;
 }
+
 .menu-toggle.active + ul {
     display: flex;
 }
+
 @media (max-width: 768px) {
     nav ul {
         display: none;
@@ -87,16 +98,17 @@ nav ul li a:hover {
         display: block;
     }
 }
+
 main {
     flex: 1;
-    margin: 20px auto; /* Auto margin to center the content and adjust for fixed nav and header */
+    margin: 20px auto;
     padding: 20px;
-    width: 95%; /* Adjust the width for better responsiveness */
-    background-color: rgba(255, 255, 255, 0.521); /* Slightly transparent background */
+    width: 95%;
+    background-color: rgba(255, 255, 255, 0.521);
     box-shadow: var(--shadow-light);
     border-radius: var(--border-radius);
     box-sizing: border-box;
-    max-width: 1200px; /* Optional: add a max-width to avoid too wide content */
+    max-width: 1200px;
 }
 table {
     width: 100%;
@@ -104,26 +116,33 @@ table {
     margin: 20px 0;
     background: var(--white);
     box-shadow: var(--shadow-light);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     overflow: hidden;
 }
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Plus doux */
+}
+
 table th {
     background: var(--primary-color);
     color: var(--white);
-    padding: 15px;
-    text-align: left;
-    font-weight: bold;
+    text-transform: uppercase;
 }
-table td {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-}
-table tr:nth-child(even) {
-    background: var(--light-bg);
-}
+
 table tr:hover {
-    background-color: #eaf3ff;
-    box-shadow: var(--shadow-light);
+    background-color: rgba(106, 27, 154, 0.1); /* Effet hover plus subtil */
+}
+
+/* Centrage et alignement des actions */
+table td:last-child {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 form {
     background: var(--white);
@@ -131,9 +150,10 @@ form {
     border-radius: 12px;
     box-shadow: var(--shadow-light);
     width: 95%;
-    max-width: 100%; /* Full width */
+    max-width: 100%;
     margin: 20px 0;
 }
+
 form label {
     display: block;
     font-weight: bold;
@@ -141,6 +161,7 @@ form label {
     margin-bottom: 10px;
     font-size: 1.1rem;
 }
+
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
@@ -155,6 +176,7 @@ form textarea {
     background: var(--light-bg);
     transition: border-color 0.3s ease;
 }
+
 form input:focus,
 form textarea:focus,
 form select:focus {
@@ -162,6 +184,50 @@ form select:focus {
     outline: none;
     background-color: #e6f2ff;
 }
+.action-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: var(--transition);
+    min-width: 120px;
+    text-align: center;
+}
+
+.action-link i {
+    font-size: 1.1rem;
+}
+
+/* Boutons plus modernes */
+.action-link.modifier {
+    background-color: #3498db;
+    color: var(--white);
+}
+.action-link.modifier:hover {
+    background-color: #2980b9;
+}
+
+.action-link.supprimer {
+    background-color: #e74c3c;
+    color: var(--white);
+}
+.action-link.supprimer:hover {
+    background-color: #c0392b;
+}
+
+.action-link.exporter {
+    background-color: #2ecc71;
+    color: var(--white);
+}
+.action-link.exporter:hover {
+    background-color: #27ae60;
+}
+
+
 form button {
     background: var(--primary-color);
     color: var(--white);
@@ -172,19 +238,26 @@ form button {
     font-size: 1.2rem;
     transition: var(--transition);
 }
+
 form button:hover {
     background: var(--secondary-color);
     transform: scale(1.05);
 }
+
 footer {
     background: var(--primary-color);
     color: var(--white);
     text-align: center;
-    padding: 10px 0; /* Reduced padding for minimized height */
+    padding: 10px 0;
     box-shadow: var(--shadow-light);
     margin-top: auto;
     font-size: 0.9rem;
 }
+form input, form textarea, form select {
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
@@ -197,5 +270,16 @@ footer {
     nav ul li a {
         padding: 15px;
         text-align: center;
+    }
+    table td:last-child {
+        gap: 10px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .action-link {
+        width: 90%;
+        justify-content: center;
     }
 }

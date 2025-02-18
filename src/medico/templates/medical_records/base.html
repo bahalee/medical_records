@@ -1,34 +1,55 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gestion des Dossiers Médicaux</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/scripts.js' %}" defer></script>
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
     <header>
-        <nav>
-            <div class="logo">
-                <a href="{% url 'home' %}">Gestion Médicale</a>
-            </div>
-            <ul>
-                <li><a href="{% url 'home' %}">Accueil</a></li>
-                <li><a href="{% url 'lister_enregistrements' %}">Gérer les Enregistrements</a></li>
-                <li><a href="{% url 'effectuer_recherche' %}">Recherche</a></li>
-                <li><a href="{% url 'appliquer_filtres' %}">Filtres</a></li>
-                <li><a href="{% url 'logout' %}">Déconnexion</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <div class="logo">
+          <a href="{% url 'home' %}">Gestion Médicale</a>
+        </div>
+        <ul>
+          <button class="menu-toggle">&#9776;</button>
+          <li><a href="{% url 'home' %}">Accueil</a></li>
+          <li>
+            <a href="{% url 'lister_enregistrements' %}"
+              >Gérer les Enregistrements</a
+            >
+          </li>
+          <li><a href="{% url 'effectuer_recherche' %}">Recherche</a></li>
+          <li><a href="{% url 'appliquer_filtres' %}">Filtres</a></li>
+          <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+        </ul>
+      </nav>
     </header>
+
     <main id="contenu-principal" role="main">
-        {% block content %}
-        {% endblock %}
+      {% block content %}{% endblock %}
     </main>
+
     <footer>
-        <p>&copy; 2025 Gestion des Dossiers Médicaux. Tous droits réservés.</p>
+      <p>&copy; 2025 Gestion des Dossiers Médicaux. Tous droits réservés.</p>
     </footer>
-</body>
+
+    <script src="{% static 'js/scripts.js' %}" defer>
+      document.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          alert("Vous devez être connecté pour accéder à cette page.");
+          window.location.href = "{% url 'login' %}";
+        }
+      });
+    </script>
+    {% block extra_js %}{% endblock %}
+  </body>
 </html>
