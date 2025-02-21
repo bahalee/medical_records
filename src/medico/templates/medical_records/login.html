@@ -9,7 +9,12 @@
       :root {
         --primary-color: #8e24aa; /* Deep purple */
         --secondary-color: #6a1b9a; /* Darker purple */
-        --background-color: rgba(103, 58, 183, 0.85); /* Semi-transparent purple */
+        --background-color: rgba(
+          103,
+          58,
+          183,
+          0.85
+        ); /* Semi-transparent purple */
         --input-background: #f3e5f5; /* Light purple */
         --text-color: #4a148c; /* Dark purple */
         --error-color: #f44336; /* Red */
@@ -145,38 +150,38 @@
   <body>
     <div>
       <h1>Connexion Médecin</h1>
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-danger">{{ message }}</div>
+      {% endfor %} {% endif %}
       <form method="post" id="login-form">
         {% csrf_token %}
         <div class="form-group">
-          {{ form.email.label_tag }}
-          {{ form.email }}
-          {% if form.email.errors %}
-            <div class="field-error">
-              {% for error in form.email.errors %}
-                <p>{{ error }}</p>
-              {% endfor %}
-            </div>
+          {{ form.email.label_tag }} {{ form.email }} {% if form.email.errors %}
+          <div class="field-error">
+            {% for error in form.email.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
           {% endif %}
         </div>
 
         <div class="form-group">
-          {{ form.password.label_tag }}
-          {{ form.password }}
+          {{ form.password.label_tag }} {{ form.password }}
           {% if form.password.errors %}
-            <div class="field-error">
-              {% for error in form.password.errors %}
-                <p>{{ error }}</p>
-              {% endfor %}
-            </div>
+          <div class="field-error">
+            {% for error in form.password.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
           {% endif %}
         </div>
 
         <button type="submit">Login</button>
 
         {% if request.resolver_match.url_name == 'login' %}
-          <a href="{% url 'create_medecin' %}" class="create-account-link">
-            Vous n'avez pas de compte ? Créez-en un.
-          </a>
+        <a href="{% url 'create_medecin' %}" class="create-account-link">
+          Vous n'avez pas de compte ? Créez-en un.
+        </a>
         {% endif %}
       </form>
     </div>

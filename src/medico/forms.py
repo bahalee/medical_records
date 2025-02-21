@@ -4,6 +4,23 @@ from .models import Medecin, Enregistrement
 class MedecinLoginForm(forms.Form):
     email = forms.EmailField(label='Email', required=True)
     password = forms.CharField(label='Password', widget=forms.PasswordInput, required=True)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        password = cleaned_data.get('password')
+
+        # Check if user exists
+        try:
+            user = Medecin.objects.get(email=email)
+        except Medecin.DoesNotExist:
+            raise forms.ValidationError("Email not registered.")
+        
+        # Check if password is correct
+        if not user.check_password(password):
+            raise forms.ValidationError("Incorrect password.")
+
+        return cleaned_data
 class MedecinLogoutForm(forms.Form):
     confirm_logout = forms.BooleanField(
         label="Confirmer la déconnexion",

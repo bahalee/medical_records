@@ -172,8 +172,6 @@
       <h1>Créer Médecin</h1>
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        
-        <!-- Manually render form fields with labels on the left -->
         <div class="form-group">
           {{ form.email.label_tag }}
           {{ form.email }}
