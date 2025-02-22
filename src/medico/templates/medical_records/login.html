@@ -166,7 +166,7 @@
         </div>
 
         <div class="form-group">
-          {{ form.password.label_tag }} {{ form.password }}
+          {{ form.password.label_tag }} {{ form.password }} 
           {% if form.password.errors %}
           <div class="field-error">
             {% for error in form.password.errors %}
@@ -189,13 +189,19 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const loginForm = document.getElementById("login-form");
-        loginForm.addEventListener("submit", function () {
-          localStorage.setItem("isLoggedIn", "true");
+
+        // Optional: Add form submission feedback
+        loginForm.addEventListener("submit", function (event) {
+          const email = loginForm.querySelector('input[name="email"]').value;
+          const password = loginForm.querySelector(
+            'input[name="password"]'
+          ).value;
+
+          if (!email || !password) {
+            alert("Veuillez remplir tous les champs."); // Optional: Display an alert if fields are empty
+            event.preventDefault(); // Prevent form submission
+          }
         });
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        if (isLoggedIn === "true") {
-          window.location.href = "{% url 'home' %}";
-        }
       });
     </script>
   </body>

@@ -36,14 +36,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Required for sessions
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Required for authentication
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'medico.middleware.DebugMiddleware',
 ]
-
 ROOT_URLCONF = 'medico_projet.urls'
 
 TEMPLATES = [
@@ -95,7 +95,8 @@ USE_I18N = True
 USE_TZ = True
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  
+    'medico.backends.EmailBackend', 
+    'django.contrib.auth.backends.ModelBackend',  # Default backend 
 ]
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -113,6 +114,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom User Model
 AUTH_USER_MODEL = 'medico.Medecin'  # Custom user model
+LOGIN_URL = '/login/' 
+
+# Session settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use database-backed sessions
+SESSION_COOKIE_NAME = 'sessionid'  # Default session cookie name
+SESSION_COOKIE_AGE = 1209600  # Session expiry time in seconds (2 weeks)
+SESSION_SAVE_EVERY_REQUEST = True  # Save the session on every request
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Session persists after browser close
 
 # Jazzmin Settings (Admin Panel Theme)
 JAZZMIN_SETTINGS = {

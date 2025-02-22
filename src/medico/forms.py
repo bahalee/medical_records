@@ -9,14 +9,11 @@ class MedecinLoginForm(forms.Form):
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         password = cleaned_data.get('password')
-
-        # Check if user exists
         try:
             user = Medecin.objects.get(email=email)
         except Medecin.DoesNotExist:
             raise forms.ValidationError("Email not registered.")
-        
-        # Check if password is correct
+
         if not user.check_password(password):
             raise forms.ValidationError("Incorrect password.")
 

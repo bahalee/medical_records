@@ -2,8 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Medecin, Enregistrement, Exporter
 from .forms import MedecinForm, EnregistrementForm, SearchForm, FiltrerForm
-
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+@never_cache
+@login_required
 def home(request):
+    print(f"User accessing home: {request.user.email}")  # Debug print
+    print(f"Session key: {request.session.session_key}")  # Debug print
     return render(request, 'medical_records/home.html')
 
 def create_medecin(request):

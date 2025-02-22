@@ -13,14 +13,14 @@ def login_medecin(request):
             password = form.cleaned_data['password']
             user = authenticate(request, email=email, password=password)
             if user is not None:
-                login(request, user)
-                return redirect('home')  # Redirect to home after successful login
+                login(request, user)  # This creates the session
+                print(f"User authenticated: {user.email}")  # Debug print
+                print(f"Session key: {request.session.session_key}")  # Debug print
+                return redirect('home')
             else:
                 messages.error(request, "Identifiants incorrects, veuillez réessayer.")
-                return render(request, 'medical_records/login.html', {'form': form})
         else:
             messages.error(request, "S'il vous plaît corrigez les erreurs ci-dessous.")
-            return render(request, 'medical_records/login.html', {'form': form})
     else:
         form = MedecinLoginForm()
     return render(request, 'medical_records/login.html', {'form': form})
@@ -32,11 +32,8 @@ def logout_medecin(request):
             feedback_message = form.cleaned_data.get('feedback')
             if feedback_message:
                 Feedback.objects.create(user=request.user, message=feedback_message)
-            logout(request)
-            response = redirect('login')
-            response.delete_cookie('sessionid') 
-            return response
+            logout(request)  # Clear the server-side session
+            return redirect('login')  # Redirect to login page after logout
     else:
         form = MedecinLogoutForm()
-
     return render(request, 'medical_records/logout.html', {'form': form})

@@ -37,17 +37,11 @@
 {% block extra_js %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        if (isLoggedIn !== "true") {
-            alert("Vous devez être connecté pour accéder à cette page.");
-            window.location.href = "{% url 'login' %}";
-        }
+        // Add logout confirmation
         document.getElementById("logout-form").addEventListener("submit", function (e) {
             const confirmLogout = confirm("Êtes-vous sûr de vouloir vous déconnecter ?");
             if (!confirmLogout) {
-                e.preventDefault();
-            } else {
-                localStorage.clear();
+                e.preventDefault();  // Prevent form submission if user cancels
             }
         });
     });
